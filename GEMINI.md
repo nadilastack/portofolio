@@ -825,3 +825,19 @@ pm run build: Berhasil 100% (Vite production bundle Laravel).
   - 
 pm run build:static: Berhasil 100% (Vite static bundle untuk GitHub Pages).
   - php artisan test: 4/4 PASS (8 assertions).
+
+## [2026-10-12] Koreksi Akun GitHub Resmi (nadilastack) & Konfigurasi Repository Portofolio
+- **Konteks & Investigasi Masalah**:
+  - Saat pengguna menjalankan git push, autentikasi browser berhasil (*Authentication Succeeded*), namun muncul pesan error 
+emote: Repository not found.
+  - Melalui pemeriksaan kredensial Windows, akun GitHub aktif pengguna teridentifikasi sebagai: **
+adilastack** (bukan 
+adilaputri).
+- **Pembaruan yang Dilakukan**:
+  1. Memperbarui githubUrl di 
+esources/js/data/portfolioData.js pada versi ID dan EN menjadi: https://github.com/nadilastack.
+  2. Memperbarui remote Git origin: git remote set-url origin https://github.com/nadilastack/portofolio.git.
+  3. Mengompilasi ulang aset produksi (
+pm run build dan 
+pm run build:static).
+  4. Melakukan commit perubahan ke branch main.
