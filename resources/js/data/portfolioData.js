@@ -4,7 +4,7 @@
  * Seluruh data pendidikan, pengalaman, skill, dan proyek bersumber langsung dari CV.
  */
 
-export const portfolioData = {
+const rawPortfolioData = {
     // ==========================================
     // VERSI BAHASA INDONESIA (ID)
     // ==========================================
@@ -2563,3 +2563,29 @@ export const portfolioData = {
         }
     }
 };
+
+const resolveAssetPaths = (obj) => {
+    const base = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
+    const prefix = base.endsWith('/') ? base : `${base}/`;
+
+    if (typeof obj === 'string') {
+        if (obj.startsWith('/images/') || obj.startsWith('/CV_') || obj.startsWith('/documents/')) {
+            return `${prefix}${obj.slice(1)}`;
+        }
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(resolveAssetPaths);
+    }
+    if (obj !== null && typeof obj === 'object') {
+        const res = {};
+        for (const [key, value] of Object.entries(obj)) {
+            res[key] = resolveAssetPaths(value);
+        }
+        return res;
+    }
+    return obj;
+};
+
+export const portfolioData = resolveAssetPaths(rawPortfolioData);
+
