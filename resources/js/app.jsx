@@ -1,0 +1,25 @@
+import './bootstrap';
+import '../css/app.css';
+
+import { createRoot } from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
+
+createInertiaApp({
+    title: (title) => title ? `${title} | Nadila Putri` : 'Nadila Putri | Fullstack Developer & Business Analyst',
+    resolve: (name) => {
+        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
+        const page = pages[`./Pages/${name}.jsx`];
+        if (!page) {
+            throw new Error(`Page ./Pages/${name}.jsx not found.`);
+        }
+        return page;
+    },
+    setup({ el, App, props }) {
+        const root = createRoot(el);
+        root.render(<App {...props} />);
+    },
+    progress: {
+        color: '#4f46e5',
+        showSpinner: false,
+    },
+});
