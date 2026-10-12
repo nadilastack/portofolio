@@ -793,3 +793,35 @@ esources/js/Components/ExperienceEducationSection.jsx)**:
      - Frontend Build (
 pm run build): Berhasil 100% (public/build/assets/app-BPHLCUhO.css 113.10 kB, public/build/assets/app-BPi8h1Su.js 637.65 kB).
      - Backend Tests (php artisan test): 4/4 PASS (8 assertions).
+
+## [2026-10-12] Persiapan Lengkap Hosting Otomatis ke GitHub Pages (nadilaputri.github.io/portofolio)
+- **Konteks & Kebutuhan Pengguna**:
+  - Pengguna ingin mempublikasikan portofolio secara online melalui **GitHub Pages** dengan alamat: https://nadilaputri.github.io/portofolio.
+  - Mengingat arsitektur proyek adalah Laravel 11 + React (Inertia.js), GitHub Pages membutuhkan static bundle. Seluruh konfigurasi otomatis disiapkan agar proyek dapat di-build statis secara mandiri oleh GitHub Actions.
+- **Pekerjaan & Peningkatan yang Diimplementasikan**:
+  1. **Konfigurasi Static Entry & Build Pipeline**:
+     - Membuat index.html sebagai static entry point dengan metadata SEO dan link font Google.
+     - Membuat ite.config.static.js untuk build statis mandiri (dist/) dengan base path adaptif ./.
+     - Menambahkan script uild:static pada package.json.
+     - Menguji build statis (
+pm run build:static): Berhasil 100% menghasilkan dist/index.html, dist/assets/, dan menyalin seluruh aset publik (gambar, sertifikat, dan CV_Nadila_Putri_IND.pdf).
+  2. **Automasi CI/CD GitHub Actions (.github/workflows/deploy.yml)**:
+     - Membuat workflow resmi GitHub Actions untuk auto-deploy ke GitHub Pages setiap ada push ke branch main.
+     - Menjalankan checkout, setup Node.js v20, npm install, build static dengan --base /portofolio/, upload artifact Pages, dan auto-deploy.
+  3. **Penyesuaian Adaptif Formulir Kontak (ContactSection.jsx)**:
+     - Menambahkan deteksi lingkungan runtime (isStaticHost).
+     - Jika dibuka di static host (seperti github.io), pengiriman formulir kontak secara cerdas membuka email client (mailto:) dengan pre-filled subjek dan isi pesan ke 
+adilaaa24putriii@gmail.com serta menampilkan status notifikasi sukses.
+  4. **Pembaruan Link Profil GitHub (portfolioData.js)**:
+     - Menyelaraskan githubUrl di versi ID dan EN menjadi https://github.com/nadilaputri.
+  5. **Inisialisasi Git & Commit Lokal**:
+     - Melakukan inisialisasi git (git init) di branch main.
+     - Mengabaikan folder /dist pada .gitignore.
+     - Melakukan commit awal 125 file dengan identitas Nadila Putri <nadilaaa24putriii@gmail.com>.
+     - Mengonfigurasi remote origin: https://github.com/nadilaputri/portofolio.git.
+- **Hasil Verifikasi**:
+  - 
+pm run build: Berhasil 100% (Vite production bundle Laravel).
+  - 
+pm run build:static: Berhasil 100% (Vite static bundle untuk GitHub Pages).
+  - php artisan test: 4/4 PASS (8 assertions).
