@@ -869,3 +869,17 @@ pm run build:static).
   - `npm run build`: Berhasil 100% tanpa error.
   - `npm run build:static`: Berhasil 100% menghasilkan bundle statis siap saji.
   - Pengujian live endpoint: `https://nadilastack.github.io/portofolio/` merespons HTTP 200 dengan script data page dan aset JavaScript terpasang utuh.
+
+
+## [2026-10-12] Penghapusan Foto Juara 3 Silat & Sinkronisasi Card Prestasi Seragam
+- **Konteks & Permintaan Pengguna**:
+  - Pengguna mengunggah tangkapan layar kartu prestasi *Mahasiswa Berprestasi Non Akademik – Juara 3 Kejuaraan Pencak Silat Nasional* dan meminta agar foto thumbnail studio pada kartu tersebut dihapus, lalu perubahan di-push ke GitHub repository.
+- **Pekerjaan & Peningkatan**:
+  1. **Pembaruan Dataset Portofolio (`resources/js/data/portfolioData.js`)**:
+     - Menghapus referensi `image: "/images/certificates/juara_3_pencak_silat_2023_studio.png"` pada entri Juara 3 Pencak Silat (2023) di kedua versi bahasa (`id` dan `en`).
+     - Kartu Juara 3 kini tampil seragam, rapi, dan terstruktur seperti kartu Juara 1 (2024) dan Juara 2 (2025) dengan menampilkan rincian kredensial legalitas Direktur PCR, nomor SK, medali perunggu, dan deskripsi prestasi.
+  2. **Pembersihan Aset Fisik**:
+     - Menghapus file `public/images/certificates/juara_3_pencak_silat_2023_studio.png` dan `juara_3_pencak_silat_2023_cutout.png`.
+  3. **Build & Verifikasi**:
+     - `npm run build`: Berhasil 100% tanpa error.
+     - `npm run build:static`: Berhasil 100% menghasilkan bundle statis terbaru.

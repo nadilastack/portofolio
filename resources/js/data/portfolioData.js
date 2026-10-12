@@ -1155,7 +1155,6 @@ const rawPortfolioData = {
                 issueDate: "31 Agustus 2023",
                 speaker: "Dr. Dadang Syarif Sihabudin Sahid, S.Si., M.Sc. (Direktur PCR)",
                 signerLabel: "Pengesah / Direktur PCR",
-                image: "/images/certificates/juara_3_pencak_silat_2023_studio.png",
                 desc: "Dianugerahi Sertifikat Mahasiswa Berprestasi Tahun Ajaran 2022/2023 Kategori Non Akademik oleh Direktur Politeknik Caltex Riau atas prestasi membanggakan meraih Juara 3 (Medali Perunggu) Kejuaraan Pencak Silat Nasional Tahun 2023 mewakili kontingen atlet kampus.",
                 awardDetails: {
                     title: "Legalitas & Rincian Juara 3 Pencak Silat Nasional",
@@ -2434,7 +2433,6 @@ const rawPortfolioData = {
                 issueDate: "August 31, 2023",
                 speaker: "Dr. Dadang Syarif Sihabudin Sahid, S.Si., M.Sc. (Director of PCR)",
                 signerLabel: "Endorser / Director of PCR",
-                image: "/images/certificates/juara_3_pencak_silat_2023_studio.png",
                 desc: "Conferred the Outstanding Student Certificate for Academic Year 2022/2023 (Non-Academic Category) by the Director of Politeknik Caltex Riau for winning 3rd Place (Bronze Medal) in the National Pencak Silat Championship representing the university athlete contingent.",
                 awardDetails: {
                     title: "Official PCR Director Award Legal Credentials",
