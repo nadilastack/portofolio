@@ -841,3 +841,31 @@ esources/js/data/portfolioData.js pada versi ID dan EN menjadi: https://github.c
 pm run build dan 
 pm run build:static).
   4. Melakukan commit perubahan ke branch main.
+
+
+## [2026-10-12] Perbaikan Layar Blank/Abu-abu (Inertia v2 DOM Mounting), Resolusi Path Gambar Subpath & Sinkronisasi Git Push
+- **Konteks & Masalah**:
+  - Pengguna melaporkan tampilan portofolio masih abu-abu/blank ("kok masih abu2") saat dibuka di `https://nadilastack.github.io/portofolio/`.
+- **Investigasi & Analisis Akar Masalah**:
+  1. **Inertia v2 DOM Mounting**:
+     - Modern `@inertiajs/react` v2 / `@inertiajs/core` mencari element `<script data-page="app" type="application/json">` via `getInitialPageFromDOM("app")`.
+     - File static `index.html` sebelumnya masih menggunakan pola Inertia v1 (`<div id="app" data-page="...">`), menyebabkan `initialPage` bernilai `null` dan memicu error `Cannot read properties of null (reading 'component')` di konsol browser.
+  2. **Asset Subpath 404 pada GitHub Pages**:
+     - Di GitHub Pages, URL repo berada pada subdirektori `/portofolio/`.
+     - Seluruh path gambar dan file PDF yang diawali tanda slash mutlak (`/images/...`, `/CV_Nadila_Putri_IND.pdf`) diarahkan browser ke root domain (`nadilastack.github.io/images/...`) dan menghasilkan HTTP 404.
+  3. **Autentikasi Git Push Windows Credential Manager**:
+     - Remote origin umum `https://github.com/nadilastack/portofolio.git` memicu interaksi login default Windows Credential Manager yang mengarah ke user lain (`ilaa2`), sementara kredensial `nadilastack` tersimpan pada target `git:https://nadilastack@github.com`.
+- **Solusi & Peningkatan yang Diimplementasikan**:
+  1. **Perbaikan Bootstrapping Inertia (`resources/js/app.jsx` & `index.html`)**:
+     - Menambahkan fallback `staticInitialPage` pada `resources/js/app.jsx` yang dieksekusi jika DOM script tag tidak ditemukan.
+     - Menyematkan `<script data-page="app" type="application/json">{"component":"Portfolio","props":{"flash":{}},"url":"/portofolio/","version":""}</script>` di dalam `index.html`.
+  2. **Resolusi Dinamis Asset & Gambar (`resources/js/data/portfolioData.js`)**:
+     - Mengembangkan fungsi reaktif `resolveAssetPaths` yang secara otomatis mendeteksi `import.meta.env.BASE_URL`.
+     - Seluruh 88 path gambar proyek, galeri, sertifikat, dan file unduhan CV otomatis mendapatkan prefix yang tepat (`/portofolio/images/...` pada GitHub Pages dan `/images/...` pada local development Laravel), bebas dari tautan 404.
+  3. **Sinkronisasi Git Remote & Push**:
+     - Mengubah remote URL ke `https://nadilastack@github.com/nadilastack/portofolio.git`.
+     - Berhasil melakukan push commit ke remote repository `origin main`.
+- **Hasil Verifikasi**:
+  - `npm run build`: Berhasil 100% tanpa error.
+  - `npm run build:static`: Berhasil 100% menghasilkan bundle statis siap saji.
+  - Pengujian live endpoint: `https://nadilastack.github.io/portofolio/` merespons HTTP 200 dengan script data page dan aset JavaScript terpasang utuh.
