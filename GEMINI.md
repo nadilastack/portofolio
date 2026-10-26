@@ -1078,3 +1078,22 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Sukses.
 - `npm run build:static`: 100% Sukses.
+
+
+## [2026-10-26] Perbaikan Posisi Sticky Toolbar CV ATS (Penghapusan Celah/Gap di Atas Menu)
+
+### 1. Masalah & Analisis
+- **Masalah**: Pada halaman CV ATS (`?view=cv`), terlihat celah abu-abu kosong (*unwanted gap/space*) antara batas atas browser dengan bar menu toolbar (`Kembali ke Portofolio`, `ID/EN`, `Cetak / Simpan PDF`).
+- **Akar Penyebab**: Kontainer induk `div` memiliki kelas Tailwind `sm:py-8` (padding top 32px), sehingga seluruh elemen di dalamnya—termasuk `<header className="sticky top-0 ...">`—terdorong ke bawah sejauh 32px.
+
+### 2. Solusi Desain
+1. **Pelepasan Padding dari Kontainer Utama (`resources/js/Pages/AtsCv.jsx`)**:
+   - Mengubah kelas kontainer induk menjadi `min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col`.
+   - Header kini menempel presisi di ujung paling atas layar browser (`top: 0`, tanpa celah/gap sedikitpun).
+2. **Pemindahan Spacing ke Dokumen Canvas**:
+   - Spacing vertikal dipindahkan ke pembungkus dokumen resume: `<div className="flex-1 py-4 sm:py-8 px-2 sm:px-4">`.
+   - Menghasilkan tampilan toolbar atas yang menyatu sempurna (*flush & seamless*) dengan jendela browser seperti aplikasi dokumen profesional (Google Docs / Figma).
+
+### 3. Build & Deploy
+- `npm run build`: 100% Berhasil.
+- `npm run build:static`: 100% Berhasil.

@@ -86,14 +86,14 @@ export default function AtsCv(props) {
     const toolsSkills = getSkillsByGroupId('tools') || 'Figma, Postman, Git & GitHub';
 
     return (
-        <div className="min-h-screen bg-slate-100 dark:bg-slate-950 py-0 sm:py-8 transition-colors">
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col transition-colors">
             <Head>
                 <title>{ats.docTitle || `CV ATS - ${profile.name} | Fullstack Developer`}</title>
                 <meta name="robots" content="noindex" />
             </Head>
 
-            {/* STICKY TOP TOOLBAR (HIDDEN SAAT PRINT) */}
-            <header className="no-print sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm py-3 px-4 sm:px-8 mb-4 sm:mb-8">
+            {/* STICKY TOP TOOLBAR (FLUSH AT THE VERY TOP, ZERO GAP) */}
+            <header className="no-print sticky top-0 z-40 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs py-3 px-4 sm:px-8">
                 <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
                     
                     {/* Back Button & ATS Status Badge */}
@@ -162,7 +162,8 @@ export default function AtsCv(props) {
             </header>
 
             {/* ATS CV DOCUMENT CANVAS (A4 SHEET) */}
-            <main className="max-w-[210mm] mx-auto bg-white text-slate-900 shadow-xl sm:rounded-md p-8 sm:p-14 cv-sheet font-sans selection:bg-indigo-100 selection:text-indigo-900">
+            <div className="flex-1 py-4 sm:py-8 px-2 sm:px-4">
+                <main className="max-w-[210mm] mx-auto bg-white text-slate-900 shadow-xl sm:rounded-md p-8 sm:p-14 cv-sheet font-sans selection:bg-indigo-100 selection:text-indigo-900">
                 
                 {/* 1. HEADER: IDENTITAS & KONTAK (ATS STANDARD TOP-TO-BOTTOM) */}
                 <header className="border-b-2 border-slate-900 pb-3 mb-5 text-center sm:text-left">
@@ -394,5 +395,6 @@ export default function AtsCv(props) {
 
             </main>
         </div>
-    );
+    </div>
+);
 }
