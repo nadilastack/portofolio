@@ -943,3 +943,8 @@ pm run build:static).
 - **Backend Tests (PHPUnit)**: **7/7 PASS (42 assertions)** dengan status `OK (7 tests, 42 assertions)`.
 - **Frontend Build (`npm run build`)**: **100% Berhasil** (`public/build/assets/app-brY6jHH8.css` 120.24 kB, `public/build/assets/app-E6bPNqK-.js` 666.32 kB).
 - **Static Build (`npm run build:static`)**: **100% Berhasil** (`dist/assets/index-brY6jHH8.css` 120.24 kB, `dist/assets/index-D9Lxks0h.js` 667.01 kB).
+
+- **Sinkronisasi Git & GitHub Deploy**:
+  - Seluruh kode fitur CV ATS, komponen modal, controller, CSS print, dan unit test telah di-commit ke branch `main` (`4cd3f5b feat: implement automated bilingual ATS-friendly CV generation and download modal`).
+  - Berhasil di-push ke remote repository `origin main` (`https://github.com/nadilastack/portofolio.git`).
+  - Memicu otomatis alur kerja GitHub Actions workflow `.github/workflows/deploy.yml` untuk mem-build dan memperbarui live website di GitHub Pages (`https://nadilastack.github.io/portofolio/`).
