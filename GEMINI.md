@@ -983,3 +983,28 @@ pm run build:static).
 - `npm run build`: 100% Berhasil.
 - `npm run build:static`: 100% Berhasil dan otomatis menghasilkan `dist/404.html`.
 - Seluruh 7 tes otomatis backend PHPUnit tetap PASS (42 assertions).
+
+
+## [2026-10-26] Penghapusan Total Opsi CV Dokumen PDF Lama & Pemfokusan Penuh ke Format ATS
+
+### 1. Konteks & Permintaan Pengguna
+- **Permintaan**:
+  - Pengguna mengunggah tangkapan layar kartu *"CV Dokumen Asli (PDF)"* pada modal unduhan dan meminta dengan tegas: **"GA USAH ADA INI"**.
+  - Pengguna tidak ingin file PDF lama ditampilkan atau dapat diunduh lagi agar tidak menimbulkan kebingungan dan memastikan recruiter/HRD hanya mendapatkan CV format ATS otomatis yang selalu sinkron dengan isi portofolio terbaru.
+
+### 2. Pekerjaan & Pembersihan
+1. **Pembersihan Modal Unduhan (`resources/js/Components/CvDownloadModal.jsx`)**:
+   - Menghapus total blok kartu *"CV Dokumen Asli (PDF)"* dan tombol *"Unduh File PDF Asli"*.
+   - Modal kini berfokus murni 100% pada **CV Format ATS Terkini**:
+     - Pilihan bahasa instan: `🇮🇩 Bahasa Indonesia` | `🇬🇧 English (Global)`.
+     - Tombol aksi utama: **"Cetak / Simpan sebagai PDF"** (membuka CV ATS dan memicu dialog print-to-PDF).
+     - Tombol aksi sekunder: **"Lihat Pratinjau Dokumen"** (melihat halaman ATS langsung).
+     - Catatan tips HRD tentang keunggulan format ATS satu kolom.
+2. **Pembersihan Halaman ATS (`resources/js/Pages/AtsCv.jsx`)**:
+   - Menghapus tombol *"Dokumen Asli"* dari toolbar navigasi atas.
+3. **Pembaruan Dataset Portofolio (`resources/js/data/portfolioData.js`)**:
+   - Menghapus objek `originalOption` dan properti `originalPdfBtn` dari dataset Bahasa Indonesia dan Bahasa Inggris.
+
+### 3. Hasil Verifikasi & Build
+- `npm run build`: 100% Berhasil tanpa error.
+- `npm run build:static`: 100% Berhasil dan otomatis menyalin `dist/404.html`.

@@ -1295,12 +1295,6 @@ const rawPortfolioData = {
                     printBtn: "Buka & Simpan PDF (ATS)",
                     previewBtn: "Pratinjau CV",
                 },
-                originalOption: {
-                    badge: "Format Dokumen Asli",
-                    title: "CV Dokumen Asli (PDF)",
-                    desc: "File dokumen PDF asli lengkap dengan layout visual grafis standar.",
-                    downloadBtn: "Unduh File PDF Asli",
-                },
                 closeBtn: "Tutup",
                 atsHint: "💡 Tips HRD: Gunakan format ATS saat melamar via Job Portal (Jobstreet, Glints, LinkedIn, Tech in Asia, Workday) agar informasi Anda dapat diparsing sempurna oleh sistem."
             },
@@ -1308,7 +1302,6 @@ const rawPortfolioData = {
                 docTitle: "CV ATS - Nadila Putri | Fullstack Developer & Business Analyst",
                 backToPortfolio: "Kembali ke Portofolio",
                 printSavePdf: "Cetak / Simpan PDF",
-                originalPdfBtn: "Dokumen Asli (PDF)",
                 atsScoreBadge: "100% ATS Friendly · Single-Column Standard",
                 autoSyncNotice: "Data CV ini tersinkronisasi otomatis dari database portofolio terkini.",
                 sections: {
@@ -2629,12 +2622,6 @@ const rawPortfolioData = {
                     printBtn: "Open & Save as PDF (ATS)",
                     previewBtn: "Preview CV",
                 },
-                originalOption: {
-                    badge: "Original Document Format",
-                    title: "Original Document CV (PDF)",
-                    desc: "Original PDF document with standard visual graphic layout.",
-                    downloadBtn: "Download Original PDF",
-                },
                 closeBtn: "Close",
                 atsHint: "💡 HR Tip: Use the ATS-friendly format when applying via job portals (LinkedIn, Jobstreet, Glints, Workday) to ensure your data is parsed flawlessly by recruitment algorithms."
             },
@@ -2642,7 +2629,6 @@ const rawPortfolioData = {
                 docTitle: "ATS Resume - Nadila Putri | Fullstack Developer & Business Analyst",
                 backToPortfolio: "Back to Portfolio",
                 printSavePdf: "Print / Save as PDF",
-                originalPdfBtn: "Original Document (PDF)",
                 atsScoreBadge: "100% ATS Friendly · Single-Column Standard",
                 autoSyncNotice: "This resume is dynamically generated and synchronized with live portfolio data.",
                 sections: {
