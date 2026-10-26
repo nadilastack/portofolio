@@ -9,9 +9,7 @@ import {
     ExternalLink,
     Mail,
     Phone,
-    MapPin,
-    Sparkles,
-    FileCheck
+    MapPin
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../Components/BrandIcons';
 
@@ -147,17 +145,6 @@ export default function AtsCv(props) {
                             <span>{ats.printSavePdf || "Cetak / Simpan PDF"}</span>
                         </button>
                     </div>
-                </div>
-
-                {/* Subtitle Bar Info */}
-                <div className="max-w-5xl mx-auto mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
-                    <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3 text-indigo-500" />
-                        {ats.autoSyncNotice || "Data CV ini tersinkronisasi otomatis dari database portofolio terkini."}
-                    </span>
-                    <span className="hidden sm:inline text-slate-400">
-                        {lang === 'id' ? 'Standar ATS: Satu Kolom, Tanpa Grafik Mengganggu, Lolos Bot HRD' : 'ATS Standard: Single-Column, Clean Typography, 100% Machine Parsable'}
-                    </span>
                 </div>
             </header>
 

@@ -1097,3 +1097,26 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Berhasil.
 - `npm run build:static`: 100% Berhasil.
+
+
+## [2026-10-26] Penghapusan Sub-Bar Keterangan Sinkronisasi pada Toolbar Halaman CV ATS
+
+### 1. Konteks & Permintaan Pengguna
+- **Permintaan**:
+  - Pengguna mengunggah tangkapan layar bar keterangan sub-header di halaman CV ATS: *"Data CV ini tersinkronisasi otomatis dari database portofolio terkini. Standar ATS: Satu Kolom, Tanpa Grafik Mengganggu, Lolos Bot HRD"* dan meminta: **"gausah"**.
+  - Bar keterangan teks tersebut dianggap mengganggu kesederhanaan dan memakan ruang vertikal toolbar.
+
+### 2. Pekerjaan & Pembersihan
+1. **Pembersihan Komponen Halaman ATS (`resources/js/Pages/AtsCv.jsx`)**:
+   - Menghapus blok elemen sub-bar keterangan teks di bawah menu utama.
+   - Toolbar navigasi atas kini tampil sangat ringkas dalam 1 baris ramping (*single-row header*):
+     - Tombol kembali: `<- Kembali ke Portofolio`
+     - Badge verifikasi: `100% ATS Friendly · Single-Column Standard`
+     - Tombol bahasa: `ID` | `EN`
+     - Tombol aksi: `Cetak / Simpan PDF`
+2. **Pembersihan Import**:
+   - Menghapus import ikon `Sparkles` dan `FileCheck` yang sudah tidak terpakai.
+
+### 3. Build & Deploy
+- `npm run build`: 100% Berhasil.
+- `npm run build:static`: 100% Berhasil.
