@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Download, Globe } from 'lucide-react';
 
-export default function Navbar({ profile, nav, lang, onToggleLang }) {
+export default function Navbar({ profile, nav, lang, onToggleLang, onOpenCvModal }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isDark, setIsDark] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -122,17 +122,27 @@ export default function Navbar({ profile, nav, lang, onToggleLang }) {
                             {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
                         </button>
 
-                        {/* Download CV */}
-                        <a
-                            href={profile.cvFileUrl}
-                            download="CV_Nadila_Putri_IND.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-600/30 transition-all hover:shadow hover:shadow-indigo-600/40"
-                        >
-                            <Download className="w-4 h-4" />
-                            <span>{nav.downloadCv}</span>
-                        </a>
+                        {/* Download CV (Opens ATS & Original Modal) */}
+                        {onOpenCvModal ? (
+                            <button
+                                onClick={onOpenCvModal}
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-600/30 transition-all hover:shadow hover:shadow-indigo-600/40 cursor-pointer"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>{nav.downloadCv}</span>
+                            </button>
+                        ) : (
+                            <a
+                                href={profile.cvFileUrl}
+                                download="CV_Nadila_Putri_IND.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-600/30 transition-all hover:shadow hover:shadow-indigo-600/40"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>{nav.downloadCv}</span>
+                            </a>
+                        )}
                     </div>
 
                     {/* Mobile Menu & Quick Controls */}
@@ -179,16 +189,29 @@ export default function Navbar({ profile, nav, lang, onToggleLang }) {
                             ))}
                         </div>
                         <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                            <a
-                                href={profile.cvFileUrl}
-                                download="CV_Nadila_Putri_IND.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white"
-                            >
-                                <Download className="w-4 h-4" />
-                                <span>{nav.downloadCv}</span>
-                            </a>
+                            {onOpenCvModal ? (
+                                <button
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        onOpenCvModal();
+                                    }}
+                                    className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white cursor-pointer"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    <span>{nav.downloadCv}</span>
+                                </button>
+                            ) : (
+                                <a
+                                    href={profile.cvFileUrl}
+                                    download="CV_Nadila_Putri_IND.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    <span>{nav.downloadCv}</span>
+                                </a>
+                            )}
                         </div>
                     </div>
                 )}

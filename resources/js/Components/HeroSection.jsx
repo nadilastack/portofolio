@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from './BrandIcons';
 
-export default function HeroSection({ profile, pillars, hero }) {
+export default function HeroSection({ profile, pillars, hero, onOpenCvModal }) {
     const getPillarIcon = (id) => {
         switch (id) {
             case 'fullstack':
@@ -97,16 +97,26 @@ export default function HeroSection({ profile, pillars, hero }) {
 
                     {/* CTA Buttons */}
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                        <a
-                            href={profile.cvFileUrl}
-                            download="CV_Nadila_Putri_IND.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] shadow-lg shadow-indigo-600/25 transition-all text-sm sm:text-base"
-                        >
-                            <Download className="w-4 h-4" />
-                            <span>{hero.ctaCv}</span>
-                        </a>
+                        {onOpenCvModal ? (
+                            <button
+                                onClick={onOpenCvModal}
+                                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] shadow-lg shadow-indigo-600/25 transition-all text-sm sm:text-base cursor-pointer hover:scale-[1.02]"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>{hero.ctaCv}</span>
+                            </button>
+                        ) : (
+                            <a
+                                href={profile.cvFileUrl}
+                                download="CV_Nadila_Putri_IND.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] shadow-lg shadow-indigo-600/25 transition-all text-sm sm:text-base"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>{hero.ctaCv}</span>
+                            </a>
+                        )}
 
                         <a
                             href="#proyek"

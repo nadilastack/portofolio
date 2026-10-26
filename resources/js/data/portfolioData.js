@@ -1280,6 +1280,62 @@ const rawPortfolioData = {
             techStack: "Laravel 11 · React.js · Inertia.js · Tailwind CSS v4",
             allRights: "Seluruh hak cipta dilindungi.",
             backToTop: "Kembali ke Atas"
+        },
+        cvData: {
+            modal: {
+                badge: "Pilihan Format Unduhan",
+                title: "Unduh Curriculum Vitae (CV)",
+                subtitle: "Pilih format CV yang sesuai dengan kebutuhan Anda atau portal rekrutmen perusahaan.",
+                langLabel: "Bahasa CV:",
+                recommendedBadge: "Rekomendasi untuk HRD & Portal ATS",
+                atsOption: {
+                    badge: "100% ATS Friendly · Otomatis",
+                    title: "CV Format ATS (Terkini & Otomatis)",
+                    desc: "Format satu kolom standar industri (Workday, Taleo, Greenhouse, dll.). Tersinkronisasi otomatis dengan portofolio terkini, proyek, magang, dan sertifikasi BNSP.",
+                    printBtn: "Buka & Simpan PDF (ATS)",
+                    previewBtn: "Pratinjau CV",
+                },
+                originalOption: {
+                    badge: "Format Dokumen Asli",
+                    title: "CV Dokumen Asli (PDF)",
+                    desc: "File dokumen PDF asli lengkap dengan layout visual grafis standar.",
+                    downloadBtn: "Unduh File PDF Asli",
+                },
+                closeBtn: "Tutup",
+                atsHint: "💡 Tips HRD: Gunakan format ATS saat melamar via Job Portal (Jobstreet, Glints, LinkedIn, Tech in Asia, Workday) agar informasi Anda dapat diparsing sempurna oleh sistem."
+            },
+            atsView: {
+                docTitle: "CV ATS - Nadila Putri | Fullstack Developer & Business Analyst",
+                backToPortfolio: "Kembali ke Portofolio",
+                printSavePdf: "Cetak / Simpan PDF",
+                originalPdfBtn: "Dokumen Asli (PDF)",
+                atsScoreBadge: "100% ATS Friendly · Single-Column Standard",
+                autoSyncNotice: "Data CV ini tersinkronisasi otomatis dari database portofolio terkini.",
+                sections: {
+                    summary: "RINGKASAN PROFESIONAL",
+                    skills: "KEAHLIAN TEKNIS",
+                    experience: "PENGALAMAN KERJA & MAGANG",
+                    projects: "PROYEK & STUDI KASUS UNGGULAN",
+                    education: "PENDIDIKAN",
+                    certifications: "SERTIFIKASI PROFESIONAL & LISENSI",
+                    leadership: "PRESTASI, KEPEMIMPINAN & ORGANISASI",
+                },
+                labels: {
+                    location: "Domisili",
+                    email: "Email",
+                    phone: "Telepon",
+                    linkedin: "LinkedIn",
+                    github: "GitHub",
+                    portfolio: "Portofolio",
+                    gpa: "IPK",
+                    role: "Peran",
+                    stack: "Teknologi",
+                    liveDemo: "Live Demo",
+                    sourceCode: "Source Code",
+                    credentialId: "No. Kredensial",
+                    modules: "Kompetensi Utama",
+                }
+            }
         }
     },
 
@@ -2558,6 +2614,62 @@ const rawPortfolioData = {
             techStack: "Laravel 11 · React.js · Inertia.js · Tailwind CSS v4",
             allRights: "All rights reserved.",
             backToTop: "Back to Top"
+        },
+        cvData: {
+            modal: {
+                badge: "Download Format Options",
+                title: "Download Curriculum Vitae (CV)",
+                subtitle: "Choose the CV format that best suits your needs or the company's recruitment portal.",
+                langLabel: "CV Language:",
+                recommendedBadge: "Recommended for HR & ATS Portals",
+                atsOption: {
+                    badge: "100% ATS Friendly · Dynamic",
+                    title: "ATS-Friendly CV (Latest & Automated)",
+                    desc: "Industry-standard single-column layout optimized for ATS parsers (Workday, Taleo, Greenhouse). Automatically synchronized with latest projects, internships, and BNSP certifications.",
+                    printBtn: "Open & Save as PDF (ATS)",
+                    previewBtn: "Preview CV",
+                },
+                originalOption: {
+                    badge: "Original Document Format",
+                    title: "Original Document CV (PDF)",
+                    desc: "Original PDF document with standard visual graphic layout.",
+                    downloadBtn: "Download Original PDF",
+                },
+                closeBtn: "Close",
+                atsHint: "💡 HR Tip: Use the ATS-friendly format when applying via job portals (LinkedIn, Jobstreet, Glints, Workday) to ensure your data is parsed flawlessly by recruitment algorithms."
+            },
+            atsView: {
+                docTitle: "ATS Resume - Nadila Putri | Fullstack Developer & Business Analyst",
+                backToPortfolio: "Back to Portfolio",
+                printSavePdf: "Print / Save as PDF",
+                originalPdfBtn: "Original Document (PDF)",
+                atsScoreBadge: "100% ATS Friendly · Single-Column Standard",
+                autoSyncNotice: "This resume is dynamically generated and synchronized with live portfolio data.",
+                sections: {
+                    summary: "PROFESSIONAL SUMMARY",
+                    skills: "TECHNICAL SKILLS",
+                    experience: "WORK & INTERNSHIP EXPERIENCE",
+                    projects: "FEATURED PROJECTS & CASE STUDIES",
+                    education: "EDUCATION",
+                    certifications: "PROFESSIONAL CERTIFICATIONS & LICENSES",
+                    leadership: "HONORS, LEADERSHIP & ORGANIZATIONS",
+                },
+                labels: {
+                    location: "Location",
+                    email: "Email",
+                    phone: "Phone",
+                    linkedin: "LinkedIn",
+                    github: "GitHub",
+                    portfolio: "Portfolio",
+                    gpa: "GPA",
+                    role: "Role",
+                    stack: "Technologies",
+                    liveDemo: "Live Demo",
+                    sourceCode: "Source Code",
+                    credentialId: "Credential ID",
+                    modules: "Key Competencies",
+                }
+            }
         }
     }
 };

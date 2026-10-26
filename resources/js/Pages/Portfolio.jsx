@@ -10,10 +10,12 @@ import ProjectsSection from '../Components/ProjectsSection';
 import ExperienceEducationSection from '../Components/ExperienceEducationSection';
 import ContactSection from '../Components/ContactSection';
 import Footer from '../Components/Footer';
+import CvDownloadModal from '../Components/CvDownloadModal';
 
 export default function Portfolio(props) {
     // Default language: 'en' (bisa di-toggle ke 'id' secara instan)
     const [lang, setLang] = useState('en');
+    const [isCvModalOpen, setIsCvModalOpen] = useState(false);
 
     useEffect(() => {
         const savedLang = localStorage.getItem('portfolio_lang');
@@ -46,12 +48,13 @@ export default function Portfolio(props) {
                 <meta property="og:type" content="website" />
             </Head>
 
-            {/* Sticky Navigation dengan Language Switcher */}
+            {/* Sticky Navigation dengan Language Switcher & CV Modal Trigger */}
             <Navbar 
                 profile={data.profile} 
                 nav={data.nav}
                 lang={lang}
                 onToggleLang={handleToggleLang}
+                onOpenCvModal={() => setIsCvModalOpen(true)}
             />
 
             {/* 1. Hero Section */}
@@ -60,6 +63,7 @@ export default function Portfolio(props) {
                     profile={data.profile} 
                     pillars={data.pillars} 
                     hero={data.hero}
+                    onOpenCvModal={() => setIsCvModalOpen(true)}
                 />
 
                 {/* 2. Tentang Saya / About */}
@@ -103,6 +107,16 @@ export default function Portfolio(props) {
                 footer={data.footer}
                 nav={data.nav}
                 lang={lang}
+                onOpenCvModal={() => setIsCvModalOpen(true)}
+            />
+
+            {/* Modal Pilihan Format CV (ATS Otomatis & File Asli) */}
+            <CvDownloadModal 
+                isOpen={isCvModalOpen}
+                onClose={() => setIsCvModalOpen(false)}
+                lang={lang}
+                onToggleLang={handleToggleLang}
+                portfolioData={portfolioData}
             />
         </div>
     );

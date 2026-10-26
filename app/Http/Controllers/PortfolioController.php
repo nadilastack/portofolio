@@ -18,4 +18,15 @@ class PortfolioController extends Controller
             'success' => session('success'),
         ]);
     }
+
+    /**
+     * Display the dynamic ATS-friendly CV page.
+     */
+    public function cv(Request $request): Response
+    {
+        return Inertia::render('AtsCv', [
+            'lang' => $request->query('lang', 'id'),
+            'autoPrint' => $request->boolean('print', false),
+        ]);
+    }
 }

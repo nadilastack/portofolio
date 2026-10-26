@@ -8,10 +8,19 @@ import { createInertiaApp } from '@inertiajs/react';
 const isBrowser = typeof window !== 'undefined';
 const hasDomPage = isBrowser && !!document.querySelector('script[data-page="app"]');
 
+const isCvRoute = isBrowser && (
+    window.location.pathname.endsWith('/cv') || 
+    window.location.pathname.endsWith('/cv/') ||
+    window.location.pathname.includes('/cv.html') ||
+    new URLSearchParams(window.location.search).get('view') === 'cv'
+);
+
 const staticInitialPage = isBrowser && !hasDomPage ? {
-    component: 'Portfolio',
+    component: isCvRoute ? 'AtsCv' : 'Portfolio',
     props: {
         flash: {},
+        lang: new URLSearchParams(window.location.search).get('lang') || 'id',
+        autoPrint: new URLSearchParams(window.location.search).get('print') === '1' || new URLSearchParams(window.location.search).get('print') === 'true',
     },
     url: window.location.pathname || '/',
     version: '',

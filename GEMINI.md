@@ -883,3 +883,63 @@ pm run build:static).
   3. **Build & Verifikasi**:
      - `npm run build`: Berhasil 100% tanpa error.
      - `npm run build:static`: Berhasil 100% menghasilkan bundle statis terbaru.
+
+
+## [2026-10-26] Implementasi CV Dinamis Berformat Standar ATS (Applicant Tracking System) Bilingual & Otomatis Terintegrasi Portofolio
+
+### 1. Konteks & Permintaan Pengguna
+- **Kebutuhan**:
+  - Pengguna menginginkan fitur unduh CV di website portofolio yang secara otomatis menghasilkan **Curriculum Vitae berformat standar ATS** (Applicant Tracking System) yang disukai oleh HRD dan lolos algoritma screening rekrutmen.
+  - **Single Source of Truth**: Setiap kali ada penambahan atau perubahan data di portofolio (proyek baru, pengalaman kerja baru, keahlian, atau sertifikasi), CV harus otomatis terupdate detik itu juga tanpa perlu mendesain atau mengedit file PDF secara manual.
+  - **Bilingual Terintegrasi**: Jika website sedang dalam mode Bahasa Indonesia (`id`), CV yang diunduh/dihasilkan otomatis berbahasa Indonesia. Begitu pula jika dalam mode Bahasa Inggris (`en`), CV otomatis berbahasa Inggris.
+
+### 2. Standar Desain ATS yang Diterapkan
+- **Single-Column Linear Hierarchy**: Tata letak satu kolom murni dari atas ke bawah (menghindari multi-kolom samping yang kerap membuat parser bot ATS seperti Workday, Taleo, Greenhouse, dan Lever keliru membaca tanggal atau pengalaman).
+- **Tipografi Standar Industri**: Teks hitam pekat (`#111827`) pada latar putih bersih (`#ffffff`) dengan font sans-serif berstandar software engineering (`Inter`).
+- **Semantic Machine-Readable Text**: 100% teks murni yang dapat disalin, dicari, dan dipindai oleh bot (bukan gambar raster).
+- **Heading Standar ATS**:
+  - ID: `RINGKASAN PROFESIONAL`, `KEAHLIAN TEKNIS`, `PENGALAMAN KERJA & MAGANG`, `PROYEK & STUDI KASUS UNGGULAN`, `PENDIDIKAN`, `SERTIFIKASI PROFESIONAL & LISENSI`, `PRESTASI, KEPEMIMPINAN & ORGANISASI`.
+  - EN: `PROFESSIONAL SUMMARY`, `TECHNICAL SKILLS`, `WORK & INTERNSHIP EXPERIENCE`, `FEATURED PROJECTS & CASE STUDIES`, `EDUCATION`, `PROFESSIONAL CERTIFICATIONS & LICENSES`, `HONORS, LEADERSHIP & ORGANIZATIONS`.
+- **Bullet Points Berbasis Aksi & Metrik**: Setiap pengalaman dan proyek memuat deskripsi dengan kata kerja aksi serta metrik kuantitatif (SUS Score 90 & 85.7 Grade A, Blackbox 100% 90 skenario, audit CWV LCP bottleneck 29.7s / 3.1s CrUX, evaluasi magang RS SMEC 94/100 Grade A, dll.).
+
+### 3. Pekerjaan & Arsitektur yang Diimplementasikan
+1. **Pembaruan Dataset Portofolio (`resources/js/data/portfolioData.js`)**:
+   - Menambahkan objek konfigurasi dan teks multibahasa `cvData` pada kedua bahasa (`id` dan `en`).
+   - Menyediakan metadata lengkap untuk modal unduhan dan view ATS (label, terjemahan heading, tips HRD, status kredensial BNSP, dan catatan sinkronisasi otomatis).
+2. **Halaman Khusus ATS CV (`resources/js/Pages/AtsCv.jsx`)**:
+   - Komponen halaman Inertia responsif yang merender kanvas dokumen A4 berstandar ATS.
+   - Dilengkapi sticky toolbar navigasi atas (otomatis disembunyikan saat cetak):
+     - Tombol kembali ke portofolio (`<- Kembali ke Portofolio`).
+     - Badge verifikasi kompatibilitas: *"100% ATS Friendly · Format Standar HRD"*.
+     - Toggle switcher bahasa instan (`🇮🇩 ID` dan `🇬🇧 EN`) sehingga HRD dapat beralih bahasa dalam satu klik tanpa refresh halaman.
+     - Tombol utama *"Cetak / Simpan PDF"* yang memicu dialog cetak browser native (`window.print()`).
+     - Opsi alternatif unduh dokumen PDF asli.
+   - Mendukung parameter query string `?lang=id` / `?lang=en` dan auto-print `?print=1`.
+3. **Komponen Modal Pilihan Unduhan (`resources/js/Components/CvDownloadModal.jsx`)**:
+   - Modal interaktif yang muncul ketika pengunjung mengklik tombol *"Download CV"* di Navbar (desktop & mobile drawer) maupun Hero section.
+   - Menyediakan pemilih bahasa langsung (`🇮🇩 Bahasa Indonesia` & `🇬🇧 English`).
+   - Memberikan 2 opsi jelas:
+     - **⭐ CV Format ATS (Terkini & Otomatis)**: Opsi unggulan dengan badge rekomendasi HRD, tombol *"Buka & Simpan PDF (ATS)"* dan tombol *"Pratinjau CV"*.
+     - **📎 CV Dokumen Asli (PDF)**: Tombol untuk mengunduh berkas PDF asli.
+     - Kotak tips HRD yang mengedukasi pelamar kapan harus menggunakan format ATS saat melamar via Job Portal.
+4. **Backend Routing & Controller (`routes/web.php` & `PortfolioController.php`)**:
+   - Menambahkan rute `GET /cv` (`portfolio.cv`).
+   - Menambahkan controller method `PortfolioController@cv` yang merender halaman `AtsCv` dengan prop `lang` dan `autoPrint`.
+5. **Konfigurasi CSS Cetak Presisi (`resources/css/app.css`)**:
+   - Menambahkan aturan `@media print`:
+     - `@page { size: A4; margin: 12mm 15mm 15mm 15mm; }`
+     - `.no-print { display: none !important; }`
+     - `.cv-sheet` tanpa shadow dan border saat cetak.
+     - `.page-break-inside-avoid` untuk mencegah elemen terpotong canggung di antara halaman.
+6. **Kompatibilitas Static Host (`resources/js/app.jsx`)**:
+   - Menambahkan deteksi rute `/cv` dan `?view=cv` pada konfigurasi `staticInitialPage` agar jika dijalankan pada static hosting (seperti GitHub Pages), halaman ATS CV tetap dapat diakses dengan mulus.
+7. **Pengujian Otomatis (`tests/Feature/AtsCvTest.php`)**:
+   - Menulis 3 unit feature test:
+     1. `test_ats_cv_page_returns_successful_response`
+     2. `test_ats_cv_page_accepts_english_language_parameter`
+     3. `test_ats_cv_page_accepts_print_parameter`
+
+### 4. Hasil Verifikasi & Pengujian
+- **Backend Tests (PHPUnit)**: **7/7 PASS (42 assertions)** dengan status `OK (7 tests, 42 assertions)`.
+- **Frontend Build (`npm run build`)**: **100% Berhasil** (`public/build/assets/app-brY6jHH8.css` 120.24 kB, `public/build/assets/app-E6bPNqK-.js` 666.32 kB).
+- **Static Build (`npm run build:static`)**: **100% Berhasil** (`dist/assets/index-brY6jHH8.css` 120.24 kB, `dist/assets/index-D9Lxks0h.js` 667.01 kB).
