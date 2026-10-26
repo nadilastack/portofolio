@@ -38,16 +38,34 @@ export default function CvDownloadModal({ isOpen, onClose, lang, onToggleLang, p
         atsHint: "💡 Tips HRD: Gunakan format ATS saat melamar via Job Portal (Jobstreet, Glints, LinkedIn, Tech in Asia, Workday) agar informasi Anda dapat diparsing sempurna oleh sistem."
     };
 
-    const cvUrlWithPrint = `/cv?lang=${lang}&print=1`;
-    const cvUrlPreview = `/cv?lang=${lang}`;
+    const getBasePrefix = () => {
+        const base = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) 
+            ? import.meta.env.BASE_URL 
+            : '/';
+        return base.endsWith('/') ? base : `${base}/`;
+    };
+
+    const isStaticHost = typeof window !== 'undefined' && (
+        window.location.hostname.includes('github.io') || 
+        window.location.protocol === 'file:'
+    );
+
+    const getCvUrl = (withPrint = false) => {
+        const prefix = getBasePrefix();
+        const printParam = withPrint ? '&print=1' : '';
+        if (isStaticHost) {
+            return `${prefix}?view=cv&lang=${lang}${printParam}`;
+        }
+        return `${prefix}cv?lang=${lang}${printParam}`;
+    };
 
     const handlePrintClick = () => {
-        window.open(cvUrlWithPrint, '_blank');
+        window.open(getCvUrl(true), '_blank');
         onClose();
     };
 
     const handlePreviewClick = () => {
-        window.open(cvUrlPreview, '_blank');
+        window.open(getCvUrl(false), '_blank');
         onClose();
     };
 

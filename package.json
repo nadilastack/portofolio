@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "build:static": "vite build --config vite.config.static.js",
+        "build:static": "vite build --config vite.config.static.js && node -e \"const fs = require('fs'); fs.copyFileSync('dist/index.html', 'dist/404.html'); console.log('Created dist/404.html');\"",
         "dev": "vite"
     },
     "devDependencies": {

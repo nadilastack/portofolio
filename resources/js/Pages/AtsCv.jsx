@@ -58,6 +58,10 @@ export default function AtsCv(props) {
         }
     };
 
+    const homeUrl = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) 
+        ? import.meta.env.BASE_URL 
+        : '/';
+
     const handlePrint = () => {
         window.print();
     };
@@ -88,7 +92,7 @@ export default function AtsCv(props) {
                     {/* Back Button & ATS Status Badge */}
                     <div className="flex items-center gap-3">
                         <a
-                            href="/"
+                            href={homeUrl}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4" />

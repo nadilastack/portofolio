@@ -948,3 +948,38 @@ pm run build:static).
   - Seluruh kode fitur CV ATS, komponen modal, controller, CSS print, dan unit test telah di-commit ke branch `main` (`4cd3f5b feat: implement automated bilingual ATS-friendly CV generation and download modal`).
   - Berhasil di-push ke remote repository `origin main` (`https://github.com/nadilastack/portofolio.git`).
   - Memicu otomatis alur kerja GitHub Actions workflow `.github/workflows/deploy.yml` untuk mem-build dan memperbarui live website di GitHub Pages (`https://nadilastack.github.io/portofolio/`).
+
+
+## [2026-10-26] Perbaikan Bug Routing & URL GitHub Pages pada Fitur CV ATS (Resolusi Error 404 & SPA Routing)
+
+### 1. Masalah & Analisis Akar Penyebab
+- **Gejala Masalah**:
+  1. Pengguna membuka `https://nadilastack.github.io/portofolio/` dan mengklik tombol *Download CV*, lalu membuka link cetak ATS.
+  2. Browser membuka tab baru dengan URL `https://nadilastack.github.io/cv?lang=id&print=1` dan menghasilkan error **"404 - There isn't a GitHub Pages site here."**.
+  3. Pengguna mengira tombol download masih mengunduh berkas lama (`CV_Nadila_Putri_IND.pdf`).
+- **Akar Masalah Teknis**:
+  1. **Hilangnya Subpath `/portofolio/`**:
+     Pada `CvDownloadModal.jsx`, URL awal didefinisikan sebagai string absolut `/cv?lang=${lang}&print=1`. Pada domain GitHub Pages (`nadilastack.github.io`), browser otomatis mengabaikan subfolder repository (`/portofolio/`) dan mencari langsung ke root `nadilastack.github.io/cv`, yang tidak ada di server GitHub.
+  2. **Keterbatasan Server Statis GitHub Pages**:
+     GitHub Pages tidak memiliki URL rewrite engine (seperti Apache `.htaccess` atau Nginx `try_files`). Akses langsung ke sub-path selain file fisik akan menghasilkan error 404 kecuali jika menggunakan query parameter atau berkas `404.html`.
+  3. **Penimpaan Script DOM Inertia**:
+     Pada `app.jsx`, `index.html` GitHub Pages memuat tag `<script data-page="app">` statis yang selalu merender komponen `Portfolio`. Akibatnya, parameter query tidak terbaca dengan baik untuk memuat komponen `AtsCv`.
+
+### 2. Solusi & Perbaikan Komprehensif
+1. **Perbaikan Generator URL Dinamis (`resources/js/Components/CvDownloadModal.jsx`)**:
+   - Menambahkan deteksi reaktif `getBasePrefix()` dari `import.meta.env.BASE_URL` (`/portofolio/` pada GitHub Pages).
+   - Pada static hosting (`github.io`), link diarahkan ke query parameter aman:
+     `https://nadilastack.github.io/portofolio/?view=cv&lang=id&print=1`
+     Metode ini 100% dijamin tidak akan pernah mengalami HTTP 404 di server statis manapun karena selalu dilayani oleh `index.html`.
+2. **Pembaruan Bootstrapping SPA (`resources/js/app.jsx`)**:
+   - Memperbaiki logika `isStaticHost` agar saat `view=cv` atau path `/cv` terdeteksi, `initialPage` langsung menginstansiasi komponen `AtsCv` dengan prop bahasa dan autoPrint aktif.
+3. **Penyediaan `dist/404.html` untuk Fallback Routing GitHub Pages**:
+   - Memperbarui skrip `build:static` pada `package.json` dan workflow `.github/workflows/deploy.yml` untuk otomatis menduplikasi `dist/index.html` menjadi `dist/404.html`.
+   - Ini memastikan jika ada pengunjung yang mengakses URL langsung `https://nadilastack.github.io/portofolio/cv`, GitHub Pages akan menyajikan `404.html` (SPA) yang kemudian me-render komponen `AtsCv` secara seamless.
+4. **Perbaikan Tombol Kembali (`resources/js/Pages/AtsCv.jsx`)**:
+   - Mengganti tautan keras `href="/"` menjadi `href={homeUrl}` berbasis `import.meta.env.BASE_URL` agar tombol *"Kembali ke Portofolio"* kembali ke `/portofolio/` dan tidak lari ke root domain.
+
+### 3. Hasil Verifikasi & Build
+- `npm run build`: 100% Berhasil.
+- `npm run build:static`: 100% Berhasil dan otomatis menghasilkan `dist/404.html`.
+- Seluruh 7 tes otomatis backend PHPUnit tetap PASS (42 assertions).
