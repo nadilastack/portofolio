@@ -1008,3 +1008,23 @@ pm run build:static).
 ### 3. Hasil Verifikasi & Build
 - `npm run build`: 100% Berhasil tanpa error.
 - `npm run build:static`: 100% Berhasil dan otomatis menyalin `dist/404.html`.
+
+
+## [2026-10-26] Redesain Responsif Modal Unduhan CV (Pencegahan Tampilan Terpotong pada Layar Laptop)
+
+### 1. Masalah & Analisis
+- **Masalah**: Pada layar laptop dengan resolusi standar (1366x768 atau skala 125%/150%), tinggi jendela modal unduhan CV sempat terpotong di bagian bawah (*overflow* melewati batas bawah layar).
+- **Akar Penyebab**: Ukuran padding yang terlalu tebal (`p-6 sm:p-8`), margin antar elemen yang longgar, dan ketiadaan batasan `max-height` relatif terhadap tinggi viewport (`vh`).
+
+### 2. Solusi Desain
+1. **Penerapan Batas Maksimal Responsif (`max-h-[92vh]`)**:
+   - Menambahkan batasan `max-h-[92vh]` dengan `overflow-y-auto` pada kontainer modal kartu.
+   - Mengubah lebar modal dari `max-w-xl` menjadi `max-w-lg` agar lebih terpusat dan kompak.
+2. **Optimalisasi Padding & Proporsi Ruang**:
+   - Mengurangi padding menjadi `p-4 sm:p-6` dan memadatkan jarak vertikal (*gap* & *margin*).
+   - Menyesuaikan ukuran tombol aksi menjadi `py-2.5` yang tetap ramah sentuhan (*touch-friendly*) namun sangat hemat ruang vertikal.
+3. **Hasil**: Seluruh modal, tombol bahasa, kartu ATS CV, tombol cetak/simpan PDF, tombol pratinjau, dan catatan tips HRD kini tampil 100% utuh di dalam layar tanpa ada bagian yang terpotong sedikitpun di berbagai resolusi layar.
+
+### 3. Build & Deploy
+- `npm run build`: 100% Sukses.
+- `npm run build:static`: 100% Sukses.
