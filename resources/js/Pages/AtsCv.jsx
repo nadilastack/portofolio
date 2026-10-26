@@ -71,11 +71,19 @@ export default function AtsCv(props) {
     const sections = ats.sections || {};
     const labels = ats.labels || {};
 
+    // Helper ekstraksi nama-nama skill dari skillGroups
+    const getSkillsByGroupId = (id) => {
+        if (!Array.isArray(skillGroups)) return '';
+        const group = skillGroups.find(g => g.id === id);
+        if (!group || !Array.isArray(group.skills)) return '';
+        return group.skills.map(s => s.name).join(', ');
+    };
+
     // Grouping skill teks untuk format ATS standar
-    const fullstackSkills = data.skills?.filter(s => s.category === 'fullstack' || s.category === 'backend' || s.category === 'frontend').map(s => s.name).join(', ') || 'Laravel 11, React.js, PHP, JavaScript (ES6+), MySQL, RESTful API, Tailwind CSS, Inertia.js, HTML5, CSS3, Vite';
-    const analysisSkills = data.skills?.filter(s => s.category === 'analysis' || s.category === 'testing').map(s => s.name).join(', ') || 'Business Process Model & Notation (BPMN), User Stories, Functional Requirements (FR), System Architecture, UAT, System Usability Scale (SUS), Blackbox Testing, Draw.io, Figma';
-    const dataSkills = data.skills?.filter(s => s.category === 'data' || s.category === 'performance').map(s => s.name).join(', ') || 'Python, SQL, Google Lighthouse, Core Web Vitals (LCP, FCP, TBT, CLS, TTFB), Chrome UX Report (CrUX), Data Analysis & Visualization';
-    const toolsSkills = data.skills?.filter(s => s.category === 'tools').map(s => s.name).join(', ') || 'Git, GitHub, Postman, Visual Studio Code, Linux/Windows Environment, Agile/Scrum';
+    const fullstackSkills = getSkillsByGroupId('fullstack') || 'PHP, Laravel 11, JavaScript, React.js, MySQL, Git, GitHub, Postman';
+    const analysisSkills = getSkillsByGroupId('analysis') || 'Requirements Analysis, System Analysis & Design, Business Process Mapping, Database Design, SDLC & Agile/Scrum, User Acceptance Testing (UAT), Gap Analysis, Stakeholder Management, Project Coordination, Digital Transformation, Technical Documentation';
+    const dataSkills = getSkillsByGroupId('data') || 'Python, SQL, Data Analysis, Customer Data Analysis, AI/ML Implementation Concept, Core Web Vitals, Google Lighthouse, PageSpeed Insights, Root Cause Analysis';
+    const toolsSkills = getSkillsByGroupId('tools') || 'Figma, Postman, Git & GitHub';
 
     return (
         <div className="min-h-screen bg-slate-100 dark:bg-slate-950 py-0 sm:py-8 transition-colors">

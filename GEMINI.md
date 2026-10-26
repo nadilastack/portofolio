@@ -1047,3 +1047,34 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Berhasil.
 - `npm run build:static`: 100% Berhasil.
+
+
+## [2026-10-26] Perbaikan Bug TypeError Penyebab Layar Putih Kosong pada Halaman CV ATS
+
+### 1. Masalah & Analisis Akar Penyebab
+- **Gejala Masalah**: Saat membuka `https://nadilastack.github.io/portofolio/?view=cv&lang=id`, halaman tampil putih polos kosong (*blank white screen*).
+- **Akar Masalah Teknis**:
+  - Pada `resources/js/Pages/AtsCv.jsx` baris 75, terdapat pemanggilan:
+    `data.skills?.filter(s => ...)`
+  - Di dalam `portfolioData.js`, properti `skills` adalah sebuah objek header (`{ badge, title, subtitle, allTab }`), bukan array. Array keahlian tersimpan di dalam `skillGroups`.
+  - Akibatnya, JavaScript mengeksekusi `(undefined)(...)` dan memicu error runtime:
+    `TypeError: data.skills.filter is not a function`
+  - Dalam React, error runtime tanpa error boundary menyebabkan seluruh pohon render di-unmount, menghasilkan layar putih kosong.
+
+### 2. Solusi Perbaikan
+1. **Fungsi Helper Ekstraksi Skill (`AtsCv.jsx`)**:
+   - Mengganti kode tersebut dengan fungsi helper aman:
+     ```javascript
+     const getSkillsByGroupId = (id) => {
+         if (!Array.isArray(skillGroups)) return '';
+         const group = skillGroups.find(g => g.id === id);
+         if (!group || !Array.isArray(group.skills)) return '';
+         return group.skills.map(s => s.name).join(', ');
+     };
+     ```
+   - Mengambil nama-nama skill secara aman dari kelompok `fullstack`, `analysis`, `data`, dan `tools`.
+2. **Hasil**: Komponen `AtsCv` kini merender 100% mulus tanpa TypeError di console browser.
+
+### 3. Build & Deploy
+- `npm run build`: 100% Sukses.
+- `npm run build:static`: 100% Sukses.
