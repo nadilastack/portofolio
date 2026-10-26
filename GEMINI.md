@@ -1028,3 +1028,22 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Sukses.
 - `npm run build:static`: 100% Sukses.
+
+
+## [2026-10-26] Penghapusan Kotak Catatan Tips HRD pada Modal Unduhan CV
+
+### 1. Konteks & Permintaan Pengguna
+- **Permintaan**:
+  - Pengguna mengunggah tangkapan layar kotak catatan warna amber/kuning: *"💡 Tips HRD: Gunakan format ATS saat melamar via Job Portal (Jobstreet, Glints, LinkedIn, Tech in Asia, Workday) agar informasi Anda dapat diparsing sempurna oleh sistem."* dan meminta: **"jangan ada ini"**.
+  - Kotak catatan tersebut dinilai kurang perlu dan menambah tinggi modal secara visual.
+
+### 2. Pekerjaan & Pembersihan
+1. **Pembersihan Komponen Modal (`resources/js/Components/CvDownloadModal.jsx`)**:
+   - Menghapus blok elemen kotak tips HRD beserta properti `atsHint`.
+   - Modal kini tampil sangat bersih, minimalis, dan elegan tanpa elemen edukasi tambahan yang tidak diperlukan.
+2. **Pembaruan Dataset Portofolio (`resources/js/data/portfolioData.js`)**:
+   - Menghapus teks `atsHint` dari dataset Bahasa Indonesia maupun Bahasa Inggris.
+
+### 3. Build & Deploy
+- `npm run build`: 100% Berhasil.
+- `npm run build:static`: 100% Berhasil.

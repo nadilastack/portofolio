@@ -1295,8 +1295,7 @@ const rawPortfolioData = {
                     printBtn: "Buka & Simpan PDF (ATS)",
                     previewBtn: "Pratinjau CV",
                 },
-                closeBtn: "Tutup",
-                atsHint: "💡 Tips HRD: Gunakan format ATS saat melamar via Job Portal (Jobstreet, Glints, LinkedIn, Tech in Asia, Workday) agar informasi Anda dapat diparsing sempurna oleh sistem."
+                closeBtn: "Tutup"
             },
             atsView: {
                 docTitle: "CV ATS - Nadila Putri | Fullstack Developer & Business Analyst",
@@ -2622,8 +2621,7 @@ const rawPortfolioData = {
                     printBtn: "Open & Save as PDF (ATS)",
                     previewBtn: "Preview CV",
                 },
-                closeBtn: "Close",
-                atsHint: "💡 HR Tip: Use the ATS-friendly format when applying via job portals (LinkedIn, Jobstreet, Glints, Workday) to ensure your data is parsed flawlessly by recruitment algorithms."
+                closeBtn: "Close"
             },
             atsView: {
                 docTitle: "ATS Resume - Nadila Putri | Fullstack Developer & Business Analyst",

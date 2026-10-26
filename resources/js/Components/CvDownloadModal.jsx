@@ -27,7 +27,6 @@ export default function CvDownloadModal({ isOpen, onClose, lang, onToggleLang, p
             previewBtn: "Pratinjau CV",
         },
         closeBtn: "Tutup",
-        atsHint: "💡 Tips HRD: Format ATS satu kolom ini memastikan data pengalaman, keahlian, dan pendidikan kamu dapat dipindai sempurna oleh sistem penyaring pelamar (ATS)."
     };
 
     const getBasePrefix = () => {
@@ -172,11 +171,6 @@ export default function CvDownloadModal({ isOpen, onClose, lang, onToggleLang, p
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Helpful HR Hint */}
-                    <div className="mt-3.5 p-2.5 sm:p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-900/40 text-[11px] text-amber-900 dark:text-amber-300 leading-relaxed">
-                        {modalContent.atsHint}
                     </div>
 
                 </div>
