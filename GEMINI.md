@@ -1120,3 +1120,22 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Berhasil.
 - `npm run build:static`: 100% Berhasil.
+
+
+## [2026-10-26] Penghapusan Badge Status "100% ATS Friendly" pada Toolbar Halaman CV ATS
+
+### 1. Konteks & Permintaan Pengguna
+- **Permintaan**:
+  - Pengguna mengunggah tangkapan layar badge pill hijau: *"100% ATS Friendly · Single-Column Standard"* pada toolbar halaman CV ATS dan meminta: **"gausah"**.
+  - Badge tersebut dihapus agar toolbar navigasi tampil semakin minimalis, elegan, dan berfokus langsung pada aksi pengguna.
+
+### 2. Pekerjaan & Pembersihan
+1. **Pembersihan Komponen Halaman ATS (`resources/js/Pages/AtsCv.jsx`)**:
+   - Menghapus elemen badge pill hijau dan ikon `CheckCircle2`.
+   - Toolbar bagian atas kini hanya memuat:
+     - Kiri: Tombol navigasi `← Kembali ke Portofolio`.
+     - Kanan: Pilihan bahasa `ID` | `EN` dan tombol aksi utama `Cetak / Simpan PDF`.
+
+### 3. Build & Deploy
+- `npm run build`: 100% Berhasil.
+- `npm run build:static`: 100% Berhasil.
