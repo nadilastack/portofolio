@@ -1192,3 +1192,11 @@ pm run build:static).
 ### 6. Sinkronisasi Git & GitHub
 - Melakukan commit perubahan: `feat: Add Palantea POS & KDS contract project, work experience, and screenshots` (Hash: `2938ef9`).
 - Berhasil di-push ke remote repository `origin/main` (`https://github.com/nadilastack/portofolio.git`).
+
+### 7. Pembaruan Tangkapan Layar Menu POS Kasir
+- Memperbaiki rendering gambar menu F&B pada antarmuka Kasir (`Kasir.jsx`) dengan menambahkan encoding presisi `%2B` untuk nama file yang memuat karakter plus (`+`).
+- Mengganti screenshot `public/images/projects/pos_kasir_screen.png` dengan tangkapan layar baru yang berfokus penuh pada **Katalog Menu Makanan**:
+  - Menampilkan foto menu resolusi tinggi asli (Indomie Goreng, Indomie Rebus, Mie Goreng Ayam Barendo, Mienas Palantea, Nasi Ayam Barendo Palantea, Nasi Dadar).
+  - Menampilkan badge kategori, label harga `18K`, `23K`, `25K`, `28K`, dan deskripsi menu.
+  - Menampilkan status meja aktif (No. Antrian 03) serta keranjang kasir terisi hidangan dan opsi pembayaran.
+- Membangun kembali aset statis via `npm run build:static` dan `npm run build`.
