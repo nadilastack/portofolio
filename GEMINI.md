@@ -1200,3 +1200,12 @@ pm run build:static).
   - Menampilkan badge kategori, label harga `18K`, `23K`, `25K`, `28K`, dan deskripsi menu.
   - Menampilkan status meja aktif (No. Antrian 03) serta keranjang kasir terisi hidangan dan opsi pembayaran.
 - Membangun kembali aset statis via `npm run build:static` dan `npm run build`.
+
+### 8. Peningkatan Foto Menu POS Kasir ke Versi Fotografi Makanan Asli
+- Mengganti aset foto flyer lama dengan koleksi **Fotografi Makanan Asli Berkualitas Tinggi** (*food photography studio & cafe setup*):
+  - *Indomie Goreng + Telur*, *Indomie Goreng Double + Telur*, *Indomie Rebus + Telur*, *Indomie Rebus Double + Telur*.
+  - *Mie Goreng Ayam Barendo Palantea*, *Mienas Palantea*, *Nasi Ayam Barendo Palantea*, *Nasi Dadar Palantea*.
+  - *Nasi Goreng Ayam Barendo*, *Selada Kuah Kacang*, *Pempek Palantea*, *Nasi Ramas Ikan Bakar*, *Nasi Ramas Rendang Daging*.
+- Memperbarui database relasional `pos_foods` dan menyalin 20 file foto resolusi tinggi ke `public/storage/pos_foods/`.
+- Memperbarui tangkapan layar utama `public/images/projects/pos_kasir_screen.png`.
+- Rebuild aset statis via `npm run build:static` dan `npm run build`.
