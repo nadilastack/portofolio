@@ -1139,3 +1139,52 @@ pm run build:static).
 ### 3. Build & Deploy
 - `npm run build`: 100% Berhasil.
 - `npm run build:static`: 100% Berhasil.
+
+
+## [2026-11-08] Integrasi Proyek Point of Sale (POS) & Kitchen Display System (KDS) Palantea
+
+### 1. Konteks & Keputusan Desain
+- **Keputusan Arsitektur Portofolio**:
+  - Mengikuti arahan pengguna, modul POS Kasir & Dapur dipisahkan sebagai **kartu proyek mandiri** (*Opsi B*) terpisah dari proyek Tugas Akhir *Website Penjualan Online Central Palantea Hidroponik*.
+  - Menambahkan catatan keterhubungan yang jujur dan presisi: *"Dikembangkan di atas codebase e-commerce hidroponik yang sudah ada."*
+  - Menghindari klaim sinkronisasi stok antara POS dan e-commerce karena tabel dan proses bisnis keduanya memang terpisah secara kode (*decoupled*).
+
+### 2. Pengalaman Kerja Baru (Work Experience)
+- Menambahkan posisi kerja teratas pada data bilingual (`id` dan `en`):
+  - **Jabatan**: `Software Developer (Kontrak)` / `Software Developer (Contract)`
+  - **Perusahaan**: `Palantea (Central Palantea)`
+  - **Periode**: `Jul 2026 – Okt 2026`
+  - **Lokasi**: `Riau, Indonesia`
+  - **Poin-Poin Tanggung Jawab & Pencapaian**:
+    1. Merancang dan membangun modul POS & KDS internal terintegrasi berbasis Laravel 12, React 18, dan Inertia.js (38 endpoint API, 8 screen antarmuka, ~12.100 baris kode).
+    2. Mengembangkan sistem pemesanan bertahap (*multi-stage batch ordering*) dengan proteksi *server-side idempotency guard* (jendela 4 detik) untuk mencegah duplikasi pesanan.
+    3. Mengimplementasikan mesin pembayaran kasir multi-metode (Cash, QRIS, Split Payment) dengan penanganan uang muka (DP), kalkulasi kembalian, serta rekonsiliasi kas bersih otomatis.
+    4. Membangun generator struk thermal *dual-mode* (58mm/80mm) untuk struk pelanggan dan tiket dapur dengan fitur pemilih batch pesanan dan styling monokrom kontras tinggi.
+    5. Menerapkan kontrol konkurensi tingkat tinggi menggunakan *pessimistic row locking* (`lockForUpdate`) dan transaksi ACID database untuk mengelola transaksi pada 30 meja antrian fisik.
+    6. Menyusun dashboard laporan penjualan terinci dengan ekspor multi-format (PDF DomPDF, Excel, CSV), visualisasi grafik via Chart.js, serta dokumentasi Buku Panduan SOP Kasir.
+
+### 3. Proyek Studi Kasus Baru: POS & KDS Palantea (`palantea-pos-kds`)
+- **Metadata Proyek**:
+  - Judul: *Sistem Point of Sale (POS) & Kitchen Display System Palantea* (ID) / *Palantea Point of Sale (POS) & Kitchen Display System* (EN).
+  - Kategori: `Fullstack` (Ditandai `featured: true`).
+  - Badge: *Pekerjaan Kontrak (2026) · Fullstack POS*.
+  - Gambar Sampul Utama: `/images/projects/pos_kasir_screen.png`.
+- **Tangkapan Layar Otentik Terverifikasi (Data Sensitif Disamarkan)**:
+  1. `pos_kasir_screen.png`: Antarmuka Layar Kasir Utama (Grid menu F&B, filter kategori, keranjang belanja, pemilih meja 01-30).
+  2. `pos_order_monitor.png`: Monitor Pesanan Lantai Kasir (Kartu meja interaktif, status pesanan aktif, checklist pengantaran).
+  3. `pos_kitchen_kds.png`: Kitchen Display System (Antrian masak koki, transisi NEW/PROCESSING, pelacakan is_served).
+  4. `pos_table_management.png`: Manajemen 30 Meja Antrian Fisik (Status 4 warna, reset meja pagi hari, mode Grab & Go).
+  5. `pos_sales_report.png`: Dashboard Laporan Penjualan (Rekonsiliasi Kas Bersih vs QRIS, grafik Chart.js, ekspor multi-format).
+- **Arsitektur & Alur Sistem**:
+  - `Kasir & Tablet Dapur` (React 18 & Inertia.js SPA) -> `Laravel 12 REST API` (38 Route & Pessimistic Lock) -> `Basis Data MySQL` (6 Tabel Relasional POS ACID) -> `Hardware & Laporan` (Struk 58mm/80mm & PDF/Excel).
+
+### 4. Pembaruan Keahlian Teknis (Skills Section)
+- Memperkaya grup keahlian `Fullstack Development` pada kedua bahasa:
+  - `Laravel (11 & 12)` (Mahir / Advanced)
+  - `Inertia.js` (Mahir / Advanced)
+  - `Point of Sale (POS) Systems` (Mahir / Advanced)
+  - `MySQL & ACID Concurrency` (Mahir / Advanced)
+
+### 5. Hasil Verifikasi & Pengujian
+- **Aset Frontend (`npm run build`)**: 100% Berhasil dikompilasi via Vite dalam 4.38 detik (`public/build/assets/app-CdP1lDSM.js` 675.76 kB, `public/build/assets/app-BnBNkFyX.css` 119.01 kB).
+- **Pengujian Backend (`vendor/bin/phpunit.bat`)**: 7/7 tes LULUS (100% PASS, 42 assertions).

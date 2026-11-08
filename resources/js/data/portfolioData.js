@@ -103,12 +103,13 @@ const rawPortfolioData = {
                 description: "Keahlian membangun aplikasi web modern, efisien, dan berskala",
                 skills: [
                     { name: "PHP", level: "Mahir", highlight: true },
-                    { name: "Laravel 11", level: "Mahir", highlight: true },
-                    { name: "JavaScript", level: "Menengah", highlight: true },
+                    { name: "Laravel (11 & 12)", level: "Mahir", highlight: true },
+                    { name: "Inertia.js", level: "Mahir", highlight: true },
                     { name: "React.js", level: "Mahir", highlight: true },
-                    { name: "MySQL", level: "Mahir", highlight: true },
-                    { name: "Git", level: "Mahir", highlight: false },
-                    { name: "GitHub", level: "Mahir", highlight: false },
+                    { name: "Point of Sale (POS) Systems", level: "Mahir", highlight: true },
+                    { name: "MySQL & ACID Concurrency", level: "Mahir", highlight: true },
+                    { name: "JavaScript", level: "Menengah", highlight: false },
+                    { name: "Git & GitHub", level: "Mahir", highlight: false },
                     { name: "Postman", level: "Mahir", highlight: false }
                 ]
             },
@@ -261,6 +262,79 @@ const rawPortfolioData = {
                         github: null,
                         demo: "https://centralpalantea.my.id/",
                         demoLabel: "Kunjungi Website Live (centralpalantea.my.id)"
+                    }
+                }
+            },
+            {
+                id: "palantea-pos-kds",
+                title: "Sistem Point of Sale (POS) & Kitchen Display System Palantea",
+                category: "Fullstack",
+                badgeText: "Pekerjaan Kontrak (2026) · Fullstack POS",
+                featured: true,
+                image: "/images/projects/pos_kasir_screen.png",
+                galleryTitle: "Tangkapan Layar & Antarmuka Sistem Kasir & Dapur Operasional",
+                gallerySubtitle: "Klik tab di bawah untuk menjelajahi layar Kasir, Monitor Pesanan, Kitchen Display System (KDS), Manajemen Meja, dan Laporan Penjualan (Data sensitif telah disamarkan)",
+                gallery: [
+                    {
+                        title: "Layar Kasir Utama",
+                        src: "/images/projects/pos_kasir_screen.png",
+                        description: "Antarmuka kasir touch-friendly dengan grid menu F&B, filter kategori, keranjang belanja multi-item, pemilih nomor meja antrian fisik (01-30), dan integrasi pembayaran multi-metode."
+                    },
+                    {
+                        title: "Monitor Pesanan",
+                        src: "/images/projects/pos_order_monitor.png",
+                        description: "Layar kontrol operasional lantai kasir yang menampilkan kartu meja interaktif, status pesanan aktif, pelunasan sisa tagihan, dan checklist hidangan yang telah diantar ke meja pelanggan."
+                    },
+                    {
+                        title: "Kitchen Display System (KDS)",
+                        src: "/images/projects/pos_kitchen_kds.png",
+                        description: "Layar dapur cerdas untuk juru masak yang menampilkan antrian pesanan baru (NEW), dalam proses masak (PROCESSING), status per-item (is_served), dan kontrol meja kotor (NEEDS_CLEANING)."
+                    },
+                    {
+                        title: "Manajemen 30 Meja Antrian",
+                        src: "/images/projects/pos_table_management.png",
+                        description: "Panel administrasi meja fisik dengan indikator 4 status (AVAILABLE, OCCUPIED, NEEDS_CLEANING, UNAVAILABLE), reset serentak meja pagi hari, dan mode pesanan cepat bawa pulang (Grab & Go)."
+                    },
+                    {
+                        title: "Laporan Penjualan POS",
+                        src: "/images/projects/pos_sales_report.png",
+                        description: "Dashboard rekonsiliasi keuangan kasir dengan perincian Kas Bersih (Nett Cash) vs QRIS, grafik tren penjualan via Chart.js, audit pembatalan/koreksi menu, dan ekspor multi-format (PDF, Excel, CSV)."
+                    }
+                ],
+                shortDescription: "Sistem Point of Sale (POS) dan Kitchen Display System (KDS) internal berbasis Laravel 12 & React 18 dengan kontrol konkurensi pessimistic locking, batch ordering, pembayaran split, dan cetak struk thermal dual-mode. Dikembangkan di atas codebase e-commerce hidroponik yang sudah ada.",
+                caseStudy: {
+                    background: "Setelah sukses mengimplementasikan website penjualan online hidroponik, Central Palantea membutuhkan sistem operasional terintegrasi untuk mendigitalisasi transaksi kantin fisik mereka yang sebelumnya mencatat pesanan meja secara manual. Sistem kasir harus mampu menangani 30 meja antrian fisik, pesanan tambahan bertahap (batch add-ons), serta pemisahan kas riil tanpa risiko tabrakan data (race condition). Dikembangkan di atas codebase e-commerce hidroponik yang sudah ada.",
+                    role: "Software Developer (Kontrak Mandiri) — Merancang dan membangun arsitektur modul kasir dan dapur secara menyeluruh (backend Laravel 12, frontend React 18 & Inertia.js, 6 tabel relasional MySQL, 38 REST endpoints, 8 screen antarmuka, kontrol konkurensi pessimistic locking, mesin cetak struk thermal dual-mode, serta penyusunan Buku Panduan SOP Kasir).",
+                    technologies: ["Laravel 12", "React 18", "Inertia.js", "MySQL", "Tailwind CSS", "Concurrency Locking (ACID)", "DomPDF", "SimpleExcel", "Chart.js"],
+                    featuresAndFlow: [
+                        "Multi-Stage Batch Ordering: Pelanggan dapat memesan hidangan tambahan di meja yang sama tanpa membuat pesanan baru, dikelompokkan dalam batch (Batch #1, #2, dst.) dan dilindungi Server-Side Idempotency Guard (jendela 4 detik).",
+                        "Pembayaran Fleksibel Multi-Metode: Mendukung pembayaran Tunai (Cash), QRIS, kombinasi Tunai + QRIS (Split Payment), Down Payment (DP), serta kalkulasi kas bersih (Nett Cash) yang memotong kembalian secara presisi.",
+                        "Kitchen Display System (KDS) & Order Monitor: Transisi status masak (NEW -> PROCESSING -> COMPLETED) dengan checklist penyajian per-item (is_served) dan kontrol status meja kotor (NEEDS_CLEANING).",
+                        "Mesin Struk Thermal Dual-Mode (58mm/80mm): Cetak struk pelanggan dan tiket pesanan dapur dengan pemilih batch pesanan dan styling monokrom kontras tinggi.",
+                        "Kontrol Konkurensi & Anti-Collision: Penerapan pessimistic row locking (lockForUpdate), transaksi ACID database, dan generator kode nota berurutan untuk menjamin integritas data pada 30 meja antrian.",
+                        "Laporan Penjualan & Audit Koreksi: Rekonsiliasi kasir dengan ekspor multi-format (PDF DomPDF, Excel SimpleExcel, CSV), visualisasi tren penjualan via Chart.js, serta fitur 1-click restore untuk item yang salah dibatalkan."
+                    ],
+                    systemArchitecture: {
+                        type: "flowchart",
+                        title: "Alur Sistem & Arsitektur Terpadu",
+                        nodes: [
+                            { label: "Kasir & Tablet Dapur", desc: "React 18 & Inertia.js SPA" },
+                            { label: "Laravel 12 REST API", desc: "38 Route & Pessimistic Lock" },
+                            { label: "Basis Data MySQL", desc: "6 Tabel Relasional POS (ACID)" },
+                            { label: "Hardware & Laporan", desc: "Struk 58mm/80mm & PDF/Excel" }
+                        ]
+                    },
+                    impacts: [
+                        "Berhasil membangun dan merilis modul POS & KDS dengan 38 endpoint API dan 8 layar operasional dalam ~12.100 baris kode bersih.",
+                        "Mendigitalisasi penuh operasional pencatatan pesanan di 30 meja fisik dan alur dapur kafe Palantea, mengeliminasi catatan kertas manual.",
+                        "Mencegah risiko pesanan dobel (double-submit) dan tabrakan transaksi antar-staf berkat proteksi konkurensi pessimistic locking dan idempotency guard.",
+                        "Mempermudah rekonsiliasi kas harian kasir melalui pemisahan otomatis kas bersih (Nett Cash) vs pembayaran QRIS pada laporan PDF dan spreadsheet Excel.",
+                        "Menghasilkan dokumentasi operasional lengkap berupa Buku Panduan SOP Kasir (539 baris) untuk standardisasi staf baru."
+                    ],
+                    links: {
+                        github: null,
+                        demo: null,
+                        demoLabel: null
                     }
                 }
             },
@@ -485,6 +559,20 @@ const rawPortfolioData = {
             }
         },
         experiences: [
+            {
+                period: "Jul 2026 – Okt 2026",
+                role: "Software Developer (Kontrak)",
+                company: "Palantea (Central Palantea)",
+                location: "Riau, Indonesia",
+                highlights: [
+                    "Merancang dan membangun sistem Point of Sale (POS) dan Kitchen Display System (KDS) internal berbasis Laravel 12, React 18, dan Inertia.js (38 endpoint API, 8 screen antarmuka, ~12.100 baris kode).",
+                    "Mengembangkan sistem pemesanan bertahap (multi-stage batch ordering) dengan proteksi server-side idempotency guard (jendela 4 detik) untuk mencegah duplikasi pesanan.",
+                    "Mengimplementasikan mesin pembayaran kasir multi-metode (Cash, QRIS, dan Split Payment) dengan penanganan uang muka (DP), kalkulasi kembalian, serta rekonsiliasi kas bersih otomatis.",
+                    "Membangun generator struk thermal dual-mode (58mm/80mm) untuk struk pelanggan dan tiket dapur dengan fitur pemilih batch pesanan dan styling monokrom kontras tinggi.",
+                    "Menerapkan kontrol konkurensi tingkat tinggi menggunakan pessimistic row locking (lockForUpdate) dan transaksi ACID database untuk mengelola transaksi pada 30 meja antrian fisik.",
+                    "Menyusun dashboard laporan penjualan terinci dengan ekspor multi-format (PDF DomPDF, Excel, CSV), visualisasi grafik via Chart.js, serta dokumentasi Buku Panduan SOP Kasir."
+                ]
+            },
             {
                 period: "Feb 2026 – Jun 2026",
                 role: "Business Analyst & Project Coordinator Intern",
@@ -1429,12 +1517,13 @@ const rawPortfolioData = {
                 description: "Engineering modern, efficient, and scalable web platforms",
                 skills: [
                     { name: "PHP", level: "Advanced", highlight: true },
-                    { name: "Laravel 11", level: "Advanced", highlight: true },
-                    { name: "JavaScript", level: "Intermediate", highlight: true },
+                    { name: "Laravel (11 & 12)", level: "Advanced", highlight: true },
+                    { name: "Inertia.js", level: "Advanced", highlight: true },
                     { name: "React.js", level: "Advanced", highlight: true },
-                    { name: "MySQL", level: "Advanced", highlight: true },
-                    { name: "Git", level: "Advanced", highlight: false },
-                    { name: "GitHub", level: "Advanced", highlight: false },
+                    { name: "Point of Sale (POS) Systems", level: "Advanced", highlight: true },
+                    { name: "MySQL & ACID Concurrency", level: "Advanced", highlight: true },
+                    { name: "JavaScript", level: "Intermediate", highlight: false },
+                    { name: "Git & GitHub", level: "Advanced", highlight: false },
                     { name: "Postman", level: "Advanced", highlight: false }
                 ]
             },
@@ -1587,6 +1676,79 @@ const rawPortfolioData = {
                         github: null,
                         demo: "https://centralpalantea.my.id/",
                         demoLabel: "Visit Live Website (centralpalantea.my.id)"
+                    }
+                }
+            },
+            {
+                id: "palantea-pos-kds",
+                title: "Palantea Point of Sale (POS) & Kitchen Display System",
+                category: "Fullstack",
+                badgeText: "Contract Project (2026) · Fullstack POS",
+                featured: true,
+                image: "/images/projects/pos_kasir_screen.png",
+                galleryTitle: "Cashier & Kitchen Operational System Screenshots",
+                gallerySubtitle: "Click the tabs below to explore Cashier, Order Monitor, Kitchen Display System (KDS), Table Management, and Sales Reports screens (Sensitive data masked)",
+                gallery: [
+                    {
+                        title: "Cashier Screen",
+                        src: "/images/projects/pos_kasir_screen.png",
+                        description: "Touch-friendly cashier interface featuring F&B menu grid, category filters, multi-item cart, physical table selector (01-30), and multi-method payment integration."
+                    },
+                    {
+                        title: "Order Monitor",
+                        src: "/images/projects/pos_order_monitor.png",
+                        description: "Floor operational monitor displaying interactive table cards, active order statuses, remaining balance settlement, and food delivery checklists."
+                    },
+                    {
+                        title: "Kitchen Display System (KDS)",
+                        src: "/images/projects/pos_kitchen_kds.png",
+                        description: "Kitchen order queue for chefs displaying new incoming orders (NEW), cooking progress (PROCESSING), item-by-item serving tracking (is_served), and table cleaning alerts."
+                    },
+                    {
+                        title: "30 Physical Tables Management",
+                        src: "/images/projects/pos_table_management.png",
+                        description: "Physical table management with 4 status indicators (AVAILABLE, OCCUPIED, NEEDS_CLEANING, UNAVAILABLE), morning one-click table reset, and Grab & Go takeaway mode."
+                    },
+                    {
+                        title: "POS Sales Reports",
+                        src: "/images/projects/pos_sales_report.png",
+                        description: "Financial reconciliation dashboard with Net Cash vs QRIS breakdown, Chart.js sales trends, cancellation audit trails, and multi-format exports (PDF, Excel, CSV)."
+                    }
+                ],
+                shortDescription: "Internal Point of Sale (POS) and Kitchen Display System (KDS) built with Laravel 12 & React 18, featuring pessimistic locking concurrency control, batch ordering, split payments, and dual-mode thermal receipt printing. Developed on top of the pre-existing hydroponics e-commerce codebase.",
+                caseStudy: {
+                    background: "Following the successful launch of their hydroponic e-commerce platform, Central Palantea required an integrated operational system to digitize their physical dining transactions, which previously relied on manual paper slips. The system needed to manage 30 physical tables, support sequential add-on ordering batches, and reconcile actual cash flow without concurrency collisions. Developed on top of the pre-existing hydroponics e-commerce codebase.",
+                    role: "Software Developer (Solo Contractor) — Architected and developed the cashier and kitchen system end-to-end (Laravel 12 backend, React 18 & Inertia.js frontend, 6 relational MySQL tables, 38 REST endpoints, 8 operational screens, pessimistic locking concurrency control, dual-mode thermal receipt printing, and operational SOP authoring).",
+                    technologies: ["Laravel 12", "React 18", "Inertia.js", "MySQL", "Tailwind CSS", "Concurrency Locking (ACID)", "DomPDF", "SimpleExcel", "Chart.js"],
+                    featuresAndFlow: [
+                        "Multi-Stage Batch Ordering: Guests can append additional items from the same table without creating duplicate orders, grouped into batches (Batch #1, #2, etc.) and protected by a 4-second Server-Side Idempotency Guard.",
+                        "Flexible Multi-Method Payment: Supports Cash, QRIS, Split Payments (Cash + QRIS), Down Payments (DP), and precise Net Cash reconciliation excluding change given.",
+                        "Kitchen Display System (KDS) & Order Monitor: Real-time cooking status transitions (NEW -> PROCESSING -> COMPLETED) with item-level serving checklists (is_served) and table cleaning controls.",
+                        "Dual-Mode Thermal Receipt Engine (58mm/80mm): Printable customer receipts and kitchen tickets with smart batch filtering and high-contrast monochrome layouts.",
+                        "Concurrency Control & Anti-Collision: Pessimistic database row locking (lockForUpdate), ACID transactions, and collision-resistant auto-increment order sequencing across 30 physical tables.",
+                        "Sales Reporting & Correction Audit: Cashier financial reconciliation with multi-format exports (PDF DomPDF, Excel SimpleExcel, CSV), Chart.js sales analytics, and 1-click restoration for accidentally canceled items."
+                    ],
+                    systemArchitecture: {
+                        type: "flowchart",
+                        title: "System Architecture & Transaction Flow",
+                        nodes: [
+                            { label: "Cashier & Kitchen Tablets", desc: "React 18 & Inertia.js SPA" },
+                            { label: "Laravel 12 REST API", desc: "38 Routes & Pessimistic Lock" },
+                            { label: "MySQL Relational DB", desc: "6 POS Tables (ACID)" },
+                            { label: "Hardware & Reports", desc: "58mm/80mm Receipt & PDF/Excel" }
+                        ]
+                    },
+                    impacts: [
+                        "Successfully built and launched the POS & KDS system with 38 API endpoints and 8 operational screens across ~12,100 clean lines of code.",
+                        "Fully digitized dining order management across 30 physical tables and kitchen workflows, eliminating manual paper order slips.",
+                        "Eliminated double-order submissions and table reservation race conditions through server-side idempotency guards and pessimistic database locking.",
+                        "Streamlined daily financial reconciliation via automated net cash flow separation versus QRIS payments in PDF and spreadsheet reports.",
+                        "Authored a comprehensive 539-line Cashier Standard Operating Procedure (SOP) manual for staff onboarding."
+                    ],
+                    links: {
+                        github: null,
+                        demo: null,
+                        demoLabel: null
                     }
                 }
             },
@@ -1811,6 +1973,20 @@ const rawPortfolioData = {
             }
         },
         experiences: [
+            {
+                period: "Jul 2026 – Oct 2026",
+                role: "Software Developer (Contract)",
+                company: "Palantea (Central Palantea)",
+                location: "Riau, Indonesia",
+                highlights: [
+                    "Architected and developed an internal Point of Sale (POS) and Kitchen Display System (KDS) using Laravel 12, React 18, and Inertia.js (38 API endpoints, 8 production screens, ~12,100 lines of code).",
+                    "Engineered a multi-stage batch ordering system with server-side 4-second idempotency guards to eliminate duplicate ticket submissions.",
+                    "Implemented a versatile multi-method payment engine supporting Cash, QRIS, and Split Payments, featuring automated change calculation, down payment (DP) handling, and net cash reconciliation.",
+                    "Built a dual-mode thermal receipt printing engine (58mm/80mm) for customer receipts and kitchen tickets with smart batch filtering and high-contrast monochrome layouts.",
+                    "Enforced robust database concurrency controls via pessimistic row locking (lockForUpdate) and ACID transactions across 30 physical dining tables.",
+                    "Developed a sales analytics dashboard with multi-format exports (DomPDF, SimpleExcel, CSV), interactive Chart.js visualizations, and authored an operational Cashier SOP Guide."
+                ]
+            },
             {
                 period: "Feb 2026 – Jun 2026",
                 role: "Business Analyst & Project Coordinator Intern",
